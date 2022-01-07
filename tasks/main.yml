@@ -1,0 +1,10 @@
+---
+
+- name: Install nginx webserver
+  become: true
+  package:
+    name: nginx
+    update_cache: true
+  notify: Restart nginx
+
+...
