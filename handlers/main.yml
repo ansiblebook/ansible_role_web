@@ -1,8 +1,8 @@
 ---
 
-- name: Restart nginx
+- name: Restart webserver
   become: true
   service:
-    name: nginx
+    name: "{{ webserver }}"
     state: restarted
 ...
