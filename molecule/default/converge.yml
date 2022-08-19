@@ -1,0 +1,9 @@
+# This is an example playbook to execute Ansible tests.
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Include ansible_role_web"
+      ansible.builtin.include_role:
+        name: "ansible_role_web"

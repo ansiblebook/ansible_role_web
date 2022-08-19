@@ -1,0 +1,48 @@
+---
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - destroy
+
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubi8
+    image: registry.access.redhat.com/ubi8/ubi-init
+    pre_build_image: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/sbin/init"
+    published_ports:
+      - 8000:80
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+
+verifier:
+  name: ansible
