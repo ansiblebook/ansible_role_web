@@ -2,9 +2,7 @@
 
 - name: Install webserver package
   become: true
-  package:
+  ansible.builtin.package:
     name: "{{ webserver }}"
     update_cache: true
   notify: Restart webserver
-
-...
