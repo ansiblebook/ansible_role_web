@@ -1,3 +1,6 @@
 ---
-# vars file for ansible_role_web
+# This is a var and it can be overriden.
+# try
+#   $ molecule converge -- -e desired_state=absent
+#   $ molecule converge -- -e web_server=httpd
 webserver: nginx

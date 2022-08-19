@@ -1,6 +1,5 @@
 ---
-# handlers file for ansible_role_web
-
+# Invoke service state changes when desired.
 - name: Control web server
   ansible.builtin.systemd:
     name: "{{ webserver }}"

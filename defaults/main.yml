@@ -1,3 +1,3 @@
 ---
-# defaults file for ansible_role_web
+# default state to converge, the component should be present.
 desired_state: present

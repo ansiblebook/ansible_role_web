@@ -1,4 +1,5 @@
 ---
+# Variable values for desired_state: present
 web_enabled_state: true
 web_package_clause: "in"
 web_service_state: running

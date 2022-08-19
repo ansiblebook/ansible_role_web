@@ -1,4 +1,5 @@
 ---
+# Variable values for desired_state: absent
 web_enabled_state: disabled
 web_package_clause: "not in"
 web_service_state: stopped
