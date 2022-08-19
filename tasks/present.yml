@@ -1,0 +1,13 @@
+---
+# tasks file for ansible_role_web
+- name: Install web server
+  ansible.builtin.package:
+    name: "{{ webserver }}"
+    state: "{{ desired_state }}"
+  notify: Control web server
+
+- name: Enable web server
+  ansible.builtin.systemd:
+    name: "{{ webserver }}"
+    enabled: true
+  notify: Control web server

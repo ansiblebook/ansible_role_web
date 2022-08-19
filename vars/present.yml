@@ -1,0 +1,5 @@
+---
+web_enabled_state: true
+web_package_clause: "in"
+web_service_state: running
+web_systemd_state: started

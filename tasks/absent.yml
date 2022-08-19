@@ -1,0 +1,9 @@
+---
+# tasks file for ansible_role_web
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Remove web server
+  ansible.builtin.package:
+    name: "{{ webserver }}"
+    state: absent

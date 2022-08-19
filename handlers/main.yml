@@ -1,8 +1,9 @@
 ---
+# handlers file for ansible_role_web
 
-- name: Restart webserver
-  become: true
-  service:
+- name: Control web server
+  ansible.builtin.systemd:
     name: "{{ webserver }}"
-    state: restarted
-...
+    state: "{{ web_systemd_state }}"
+    enabled: "{{ web_enabled_state }}"
+    daemon_reload: true

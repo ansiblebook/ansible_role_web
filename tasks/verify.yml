@@ -1,0 +1,45 @@
+---
+# tasks file for ansible_role_web
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+
+- name: Assert package is installed
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - webserver {{ web_package_clause }} ansible_facts.packages
+
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Assert service absence
+  when: desired_state == 'absent'
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - ansible_facts.services['{{ webserver }}'] is not defined
+
+- name: Test the web server
+  when: desired_state == 'present'
+  block:
+    - name: Assert that service is OK
+      ansible.builtin.assert:
+        quiet: true
+        that:
+          - ansible_facts.services['{{ webserver~'.service' }}'].status == 'enabled'
+          - ansible_facts.services['{{ webserver~'.service' }}'].state == 'running'
+
+    - name: Verify http port
+      ansible.builtin.wait_for:
+        port: 80
+        state: started
+        timeout: 10
+
+    - name: Verify http response
+      ansible.builtin.uri:
+        url: http://127.0.0.1/
+        status_code:
+          - 200
+          - 301
+          - 403

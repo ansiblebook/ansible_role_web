@@ -1,0 +1,5 @@
+---
+web_enabled_state: disabled
+web_package_clause: "not in"
+web_service_state: stopped
+web_systemd_state: stopped
